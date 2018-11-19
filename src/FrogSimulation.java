@@ -16,19 +16,29 @@ public class FrogSimulation
 
     public boolean simulate()
     {
+        System.out.print("Goal: " + maxHops + " Hops:  ");
         int pos = 0;
+        int hop = 0;
         for (int i = 0; i < maxHops; i++)
         {
-            pos += hopDistance();
+            hop = hopDistance();
+            pos += hop;
+            System.out.print(hop + "  ");
             if (pos >= goalDistance)
             {
+                if(pos > goalDistance)
+                    System.out.println("    Success: Passed Goal Distance by " + (pos - goalDistance) + " inches");
+                else
+                    System.out.println("    Success: Reached Goal in " + i + " hops");
                 return true;
             }
             else if (pos < 0)
             {
+                System.out.println("    Failed: Reached Negative Distance of " + pos);
                 return false;
             }
         }
+        System.out.println("    Failed: Got Stuck at " + pos);
         return false;
     }
 
